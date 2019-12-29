@@ -6,7 +6,7 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('api/admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest')),
     path('api-token-auth', obtain_jwt_token),
     path('user/', include(('app_dir.user.urls', 'user'), namespace='user')),
