@@ -9,8 +9,8 @@ class Casino(models.Model):
         unique=True,
         max_length=128
     )
-    is_disabled = models.BooleanField(blank=True, choices=((0, 'No'), (1, 'Yes')), default=0)
-    is_recommended = models.BooleanField(blank=True, choices=((0, 'No'), (1, 'Yes')), default=0)
+    is_disabled = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
+    is_recommended = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
     logo = models.FileField(
         pgettext_lazy('Casino Logo', 'logo'),
         upload_to='casinos',
@@ -85,7 +85,7 @@ class Deals(models.Model):
         unique=True,
         max_length=128
     )
-    is_disabled = models.BooleanField(blank=True, choices=((0, 'No'), (1, 'Yes')), default=0)
+    is_disabled = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
     casino = models.ForeignKey(
         Casino,
         on_delete=None,

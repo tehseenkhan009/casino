@@ -15,7 +15,7 @@ class CasinoListAPIView(ListAPIView):
     pagination_class = PostLimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = Casino.objects.all()
+        queryset_list = Casino.objects.filter(is_disabled=False)
 
         page_size = 'page_size'
         if self.request.GET.get(page_size):
@@ -26,7 +26,7 @@ class CasinoListAPIView(ListAPIView):
         if query:
             queryset_list = queryset_list.filter(
                 Q(email__icontains=query) |
-                Q(username__icontains=query) | Q(is_disabled=0)
+                Q(username__icontains=query)
             )
 
         return queryset_list.order_by('-id')
@@ -49,7 +49,7 @@ class DealsListAPIView(ListAPIView):
         if query:
             queryset_list = queryset_list.filter(
                 Q(email__icontains=query) |
-                Q(username__icontains=query) | Q(is_disabled=0)
+                Q(username__icontains=query)
             )
 
         return queryset_list.order_by('-id')

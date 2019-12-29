@@ -21,8 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'v%^q7%_uf+k9@_6zh=z1-0&4%9vagw&yn$m_lad=&yb3(m7o)x'
-DEBUG = False
-ALLOWED_HOSTS = ['madcasinobonus.co.uk']
+DEBUG = True
+ALLOWED_HOSTS = ['madcasinobonus.co.uk', '127.0.0.1']
 
 DEFAULT_APPS = (
     'django.contrib.admin',
