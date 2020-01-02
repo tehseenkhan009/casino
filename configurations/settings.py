@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'v%^q7%_uf+k9@_6zh=z1-0&4%9vagw&yn$m_lad=&yb3(m7o)x'
 DEBUG = True
 ALLOWED_HOSTS = ['madcasinobonus.co.uk', '127.0.0.1']
-
+HOST = 'madcasinobonus.co.uk'
 DEFAULT_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
