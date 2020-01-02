@@ -40,6 +40,7 @@ LOCAL_APPS = (
     'app_dir.user',
     'app_dir.module',
     'app_dir.casino',
+    'app_dir.blog',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + EXTERNAL_APPS + LOCAL_APPS

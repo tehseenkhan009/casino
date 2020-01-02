@@ -11,6 +11,7 @@ class CasinoSerializer(serializers.ModelSerializer):
             'logo',
             'description',
             'background',
+            'is_recommended',
             'logo_background'
         ]
 
