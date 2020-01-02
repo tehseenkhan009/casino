@@ -16,6 +16,7 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['-created_on']
+        verbose_name_plural = 'Categories'
 
     def __str__(self):
         return self.title

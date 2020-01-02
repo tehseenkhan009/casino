@@ -17,6 +17,7 @@ class Casino(models.Model):
         null=True,
         blank=True
     )
+    url_casino = models.URLField(max_length=500, null=True, blank=True, default='https://')
     background = models.FileField(
         pgettext_lazy('Background', 'Background'),
         upload_to='backgrounds',
@@ -83,6 +84,9 @@ class Bonus(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = 'Bonuses'
+
 
 class Deals(models.Model):
     def __str__(self):
@@ -119,3 +123,6 @@ class Deals(models.Model):
         null=True,
         blank=True
     )
+
+    class Meta:
+        verbose_name_plural = 'Deals'
