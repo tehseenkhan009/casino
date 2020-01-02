@@ -130,7 +130,7 @@ USE_TZ = True
 STATIC_URL = '/api/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/api/static/media/'
+MEDIA_URL = 'https://madcasinobonus.co.uk/api/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 
 REST_FRAMEWORK = {
