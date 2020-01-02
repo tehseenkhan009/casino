@@ -4,15 +4,6 @@ from app_dir.casino.models import Casino, Deals, Bonus
 
 
 class CasinoSerializer(serializers.ModelSerializer):
-    logo = serializers.SerializerMethodField()
-    logo_background = serializers.SerializerMethodField()
-
-    def get_logo(self, obj):
-        return obj.logo
-
-    def get_logo_background(self, obj):
-        return obj.logo_background
-
     class Meta:
         model = Casino
         fields = [
