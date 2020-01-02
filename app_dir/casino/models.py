@@ -12,19 +12,27 @@ class Casino(models.Model):
     is_disabled = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
     is_recommended = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
     logo = models.FileField(
-        pgettext_lazy('Casino Logo', 'logo'),
+        pgettext_lazy('Casino Logo', 'Logo'),
         upload_to='casinos',
-        null=True
+        null=True,
+        blank=True
+    )
+    background = models.FileField(
+        pgettext_lazy('Background', 'Background'),
+        upload_to='backgrounds',
+        null=True,
+        blank=True
     )
     logo_background = models.FileField(
-        pgettext_lazy('Logo Background', 'background_logo'),
+        pgettext_lazy('Logo+Background', 'LOGO + Background'),
         upload_to='backgrounds',
-        null=True
+        null=True,
+        blank=True
     )
     description = models.TextField(
         pgettext_lazy('Casino Description', 'description'),
         blank=True,
-        null=True
+        null=True,
     )
     created_at = models.DateTimeField(
         pgettext_lazy('Casino Created', 'created at'),
