@@ -1,7 +1,8 @@
 # Compiled Python modules
 *.pyo
 *.pyc
-
+.env
+env
 # SQLite
 *.db
 *.s3db
