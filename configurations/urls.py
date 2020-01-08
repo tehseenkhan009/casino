@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/user/', include(('app_dir.user.api.urls', 'user_api'), namespace='user_api')),
     path('api/casino/', include(('app_dir.casino.api.urls', 'casino_api'), namespace='casino_api')),
     path('api/blog/', include(('app_dir.blog.api.urls', 'blog_api'), namespace='blog_api')),
-    path('api/module/', include(('app_dir.module.api.urls', 'module_api'), namespace='module_api'))
+    path('api/module/', include(('app_dir.module.api.urls', 'module_api'), namespace='module_api')),
+    path('api/tinymce/', include('tinymce.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

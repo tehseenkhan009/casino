@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import pgettext_lazy
 from django.utils.timezone import now
+from tinymce.models import HTMLField
 
 
 class Casino(models.Model):
@@ -17,6 +18,7 @@ class Casino(models.Model):
         null=True,
         blank=True
     )
+
     url_casino = models.URLField(max_length=500, null=True, blank=True, default='https://')
     background = models.FileField(
         pgettext_lazy('Background', 'Background'),
@@ -30,7 +32,7 @@ class Casino(models.Model):
         null=True,
         blank=True
     )
-    description = models.TextField(
+    description = HTMLField(
         pgettext_lazy('Casino Description', 'description'),
         blank=True,
         null=True,
