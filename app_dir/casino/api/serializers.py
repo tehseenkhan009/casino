@@ -23,7 +23,7 @@ class BonusSerializer(serializers.ModelSerializer):
         fields = [
             'name',
             'percent',
-            'price'
+            'price',
         ]
 
 
@@ -37,4 +37,8 @@ class DealsSerializer(serializers.ModelSerializer):
             'name',
             'casino',
             'bonus',
+            'deal_message',
+            'free_spins',
+            'wager',
+            'rating_number'
         ]

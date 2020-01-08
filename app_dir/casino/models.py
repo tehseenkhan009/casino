@@ -103,9 +103,30 @@ class Deals(models.Model):
         on_delete=None,
         null=True
     )
+    rating_number = models.FloatField(
+        pgettext_lazy('Rating', 'Rating'),
+        blank=True,
+        null=True,
+        help_text='1.0 to 5.0'
+    )
     bonus = models.ForeignKey(
         Bonus,
         on_delete=None,
+        null=True
+    )
+    free_spins = models.IntegerField(
+        pgettext_lazy('Free Spins', 'Spins'),
+        blank=True,
+        null=True
+    )
+    wager = models.IntegerField(
+        pgettext_lazy('Wager', 'Wager'),
+        blank=True,
+        null=True
+    )
+    deal_message = models.TextField(
+        pgettext_lazy('Message', 'Message'),
+        blank=True,
         null=True
     )
     created_at = models.DateTimeField(
@@ -116,12 +137,6 @@ class Deals(models.Model):
     updated_at = models.DateTimeField(
         pgettext_lazy('Updated', 'updated at'),
         default=now
-    )
-
-    order_id = models.IntegerField(
-        pgettext_lazy('order_id', 'Order Id'),
-        null=True,
-        blank=True
     )
 
     class Meta:
