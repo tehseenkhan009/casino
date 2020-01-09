@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
+from django.utils.translation import pgettext_lazy
 
 
 STATUS = (
@@ -33,7 +35,11 @@ class Post(models.Model):
         blank=True
     )
     updated_on = models.DateTimeField(auto_now= True)
-    content = models.TextField()
+    content = HTMLField(
+        pgettext_lazy('Casino Description', 'description'),
+        blank=True,
+        null=True,
+    )
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
 

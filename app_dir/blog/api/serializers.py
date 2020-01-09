@@ -21,6 +21,7 @@ class PostSerializer(serializers.ModelSerializer):
             'title',
             'image',
             'slug',
-            'category'
+            'category',
+            'content'
         ]
 
