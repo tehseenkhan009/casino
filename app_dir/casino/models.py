@@ -105,7 +105,7 @@ class Country(models.Model):
 
 class CountryUrl(models.Model):
     def __str__(self):
-        return self.casino.code + ' | ' + self.country.name + ' | URL: ' + self.url[:30]
+        return self.country.code + ' | ' + self.casino.name + ' | URL: ' + self.url[:30]
 
     class Meta:
         verbose_name = 'Casino Country'
