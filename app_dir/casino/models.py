@@ -155,7 +155,7 @@ class Deals(models.Model):
         on_delete=None,
         null=True
     )
-    url_country = models.ManyToManyField(CountryUrl)
+    url_country = models.ManyToManyField(CountryUrl, verbose_name='Countries')
     free_spins = models.IntegerField(
         pgettext_lazy('Free Spins', 'Spins'),
         blank=True,
