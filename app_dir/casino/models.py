@@ -27,7 +27,7 @@ class Casino(models.Model):
         blank=True
     )
     logo_background = models.FileField(
-        pgettext_lazy('Logo+Background', 'LOGO + Background'),
+        pgettext_lazy('Logo + Background', 'Logo + Background'),
         upload_to='backgrounds',
         null=True,
         blank=True
@@ -90,6 +90,40 @@ class Bonus(models.Model):
         verbose_name_plural = 'Bonuses'
 
 
+class Country(models.Model):
+    class Meta:
+        verbose_name = 'Country'
+        verbose_name_plural = 'Countries'
+
+    def __str__(self):
+        return self.name
+
+    id = models.AutoField(primary_key=True)
+    code = models.CharField(max_length=4, unique=True)
+    name = models.CharField(max_length=255, unique=True)
+
+
+class CountryUrl(models.Model):
+    def __str__(self):
+        return self.casino.name + ' | ' + self.country.code + ' | URL: ' + self.url[:30]
+
+    class Meta:
+        verbose_name = 'Casino Country'
+        verbose_name_plural = 'Casino Countries'
+
+    country = models.ForeignKey(
+        Country,
+        on_delete=None,
+        null=True
+    )
+    casino = models.ForeignKey(
+        Casino,
+        on_delete=None,
+        null=True
+    )
+    url = models.CharField(max_length=255, unique=True)
+
+
 class Deals(models.Model):
     def __str__(self):
         return self.casino.name + ' | Bonus: ' + self.bonus.name[:50]
@@ -105,6 +139,11 @@ class Deals(models.Model):
         on_delete=None,
         null=True
     )
+    counter = models.IntegerField(
+        pgettext_lazy('Clicks', 'Clicks'),
+        blank=True,
+        null=True
+    )
     rating_number = models.FloatField(
         pgettext_lazy('Rating', 'Rating'),
         blank=True,
@@ -116,6 +155,7 @@ class Deals(models.Model):
         on_delete=None,
         null=True
     )
+    url_country = models.ManyToManyField(CountryUrl)
     free_spins = models.IntegerField(
         pgettext_lazy('Free Spins', 'Spins'),
         blank=True,
