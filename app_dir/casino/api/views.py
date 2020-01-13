@@ -40,6 +40,8 @@ class DealsListAPIView(ListAPIView):
     def get_queryset(self, *args, **kwargs):
         queryset_list = Deals.objects.all()
 
+        print(self.request.META)
+
         page_size = 'page_size'
         if self.request.GET.get(page_size):
             pagination.PageNumberPagination.page_size = self.request.GET.get(page_size)
