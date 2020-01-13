@@ -9,6 +9,15 @@ from .serializers import CasinoSerializer, Casino, DealsSerializer, Deals
 from ...core.pagination import PostLimitOffsetPagination
 
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
 class CasinoListAPIView(ListAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = CasinoSerializer
@@ -40,7 +49,7 @@ class DealsListAPIView(ListAPIView):
     def get_queryset(self, *args, **kwargs):
         queryset_list = Deals.objects.all()
 
-        print(self.request.META)
+        print(get_client_ip(self.request))
 
         page_size = 'page_size'
         if self.request.GET.get(page_size):
