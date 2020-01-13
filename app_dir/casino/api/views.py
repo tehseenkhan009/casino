@@ -7,6 +7,7 @@ from rest_framework import pagination
 from rest_framework.permissions import (IsAuthenticatedOrReadOnly, IsAuthenticated)
 from .serializers import CasinoSerializer, Casino, DealsSerializer, Deals
 from ...core.pagination import PostLimitOffsetPagination
+from django.contrib.gis.geoip2 import GeoIP2
 
 
 def get_client_ip(request):
@@ -16,6 +17,12 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+def get_client_country(request):
+    ip = get_client_ip(request)
+    g = GeoIP2()
+    return g.country(ip)
 
 
 class CasinoListAPIView(ListAPIView):
@@ -49,7 +56,8 @@ class DealsListAPIView(ListAPIView):
     def get_queryset(self, *args, **kwargs):
         queryset_list = Deals.objects.all()
 
-        print(get_client_ip(self.request))
+        client_ip = get_client_country(self.request)
+        print(client_ip)
 
         page_size = 'page_size'
         if self.request.GET.get(page_size):

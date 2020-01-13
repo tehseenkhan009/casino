@@ -54,7 +54,7 @@ LOCAL_APPS = (
 )
 
 INSTALLED_APPS = DEFAULT_APPS + EXTERNAL_APPS + LOCAL_APPS
-
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
