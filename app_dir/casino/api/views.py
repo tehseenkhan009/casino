@@ -5,9 +5,11 @@ from rest_framework.generics import (
 from django.db.models import Q
 from rest_framework import pagination
 from rest_framework.permissions import (IsAuthenticatedOrReadOnly, IsAuthenticated)
-from .serializers import CasinoSerializer, Casino, DealsSerializer, Deals, Country
+from .serializers import CasinoSerializer, Casino, DealsSerializer, Deals, Country, CountryUrl
 from ...core.pagination import PostLimitOffsetPagination
 from django.contrib.gis.geoip2 import GeoIP2
+from django.db.models import Prefetch
+
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -60,11 +62,14 @@ class DealsListAPIView(ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         client_country = get_client_country(self.request)
+
         if client_country is not 0:
             country_id = Country.objects.get(code=client_country)
-            queryset_list = Deals.objects.filter(url_country__country_id=country_id.id, is_disabled=False)
+            queryset_list = Deals.objects.prefetch_related(Prefetch(
+                'url_country',
+                queryset=CountryUrl.objects.filter(country_id=country_id.id))).filter(url_country__country_id=country_id.id, is_disabled=False)
         else:
-            queryset_list = Deals.objects.filter(url_country=None, is_disabled=False)
+            queryset_list = Deals.objects.filter(url_country=None)
 
         page_size = 'page_size'
         if self.request.GET.get(page_size):

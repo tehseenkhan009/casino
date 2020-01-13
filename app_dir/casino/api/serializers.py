@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from app_dir.casino.models import Casino, Deals, Bonus, Country
+from app_dir.casino.models import Casino, Deals, Bonus, Country, CountryUrl
 
 
 class CasinoSerializer(serializers.ModelSerializer):
@@ -27,18 +27,31 @@ class BonusSerializer(serializers.ModelSerializer):
         ]
 
 
+class CountryUrlSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CountryUrl
+        fields = [
+            'url',
+        ]
+
+
 class DealsSerializer(serializers.ModelSerializer):
     casino = CasinoSerializer()
     bonus = BonusSerializer()
+    url_country = CountryUrlSerializer(many=True)
 
     class Meta:
         model = Deals
         fields = [
+            'id',
             'name',
             'casino',
             'bonus',
             'deal_message',
             'free_spins',
             'wager',
+            'deal_url',
+            'url_country',
+            'deal_disclaimer',
             'rating_number'
         ]

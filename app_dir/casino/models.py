@@ -155,7 +155,12 @@ class Deals(models.Model):
         on_delete=None,
         null=True
     )
-    url_country = models.ManyToManyField(CountryUrl, verbose_name='Countries')
+    deal_url = models.CharField(
+        pgettext_lazy('Deal Url', 'Deal Url'),
+        max_length=600,
+        null=True
+    )
+    url_country = models.ManyToManyField(CountryUrl, verbose_name='Countries', blank=True)
     free_spins = models.IntegerField(
         pgettext_lazy('Free Spins', 'Spins'),
         blank=True,
@@ -168,6 +173,11 @@ class Deals(models.Model):
     )
     deal_message = models.TextField(
         pgettext_lazy('Message', 'Message'),
+        blank=True,
+        null=True
+    )
+    deal_disclaimer = HTMLField(
+        pgettext_lazy('Disclaimer', 'Disclaimer'),
         blank=True,
         null=True
     )
