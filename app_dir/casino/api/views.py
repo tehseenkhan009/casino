@@ -62,20 +62,22 @@ class DealsListAPIView(ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         client_country = get_client_country(self.request)
-
+        filters = Q(url_country=None)
+        country_id = 243
         if client_country is not 0:
             country_id = Country.objects.get(code=client_country)
-            queryset_list = Deals.objects.prefetch_related(Prefetch(
-                'url_country',
-                queryset=CountryUrl.objects.filter(country_id=country_id.id))).filter(url_country__country_id=country_id.id, is_disabled=False)
-        else:
-            queryset_list = Deals.objects.filter(url_country=None)
+            filters = (Q(url_country__country_id=country_id) | Q(url_country=None))
+
+        queryset_list = Deals.objects.prefetch_related(
+            Prefetch('url_country', queryset=CountryUrl.objects.filter(country_id=country_id))).\
+            filter(filters & Q(is_disabled=False))
 
         page_size = 'page_size'
         if self.request.GET.get(page_size):
             pagination.PageNumberPagination.page_size = self.request.GET.get(page_size)
         else:
             pagination.PageNumberPagination.page_size = 10
+
         query = self.request.GET.get('q')
         if query:
             queryset_list = queryset_list.filter(

@@ -158,7 +158,8 @@ class Deals(models.Model):
     deal_url = models.CharField(
         pgettext_lazy('Deal Url', 'Deal Url'),
         max_length=600,
-        null=True
+        null=True,
+        blank=True
     )
     url_country = models.ManyToManyField(CountryUrl, verbose_name='Countries', blank=True)
     free_spins = models.IntegerField(
