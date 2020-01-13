@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from app_dir.casino.models import Casino, Deals, Bonus
+from app_dir.casino.models import Casino, Deals, Bonus, Country
 
 
 class CasinoSerializer(serializers.ModelSerializer):
