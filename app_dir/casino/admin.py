@@ -5,7 +5,6 @@ from .models import Casino, Bonus, Deals, CountryUrl, Country
 class CasinoAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_recommended')
     ordering = ('name', 'is_recommended')
-    pass
 
 
 class BonusAdmin(admin.ModelAdmin):

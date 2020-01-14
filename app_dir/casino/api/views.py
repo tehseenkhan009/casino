@@ -66,7 +66,7 @@ class DealsListAPIView(ListAPIView):
         country_id = 243
         if client_country is not 0:
             country_id = Country.objects.get(code=client_country)
-            filters = (Q(url_country__country_id=country_id) | Q(url_country=None))
+            filters = (~Q(url_country__country_id=country_id) | Q(url_country=None))
 
         queryset_list = Deals.objects.prefetch_related(
             Prefetch('url_country', queryset=CountryUrl.objects.filter(country_id=country_id))).\
