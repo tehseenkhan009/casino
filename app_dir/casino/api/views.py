@@ -44,7 +44,7 @@ class CasinoListAPIView(ListAPIView):
         if self.request.GET.get(page_size):
             pagination.PageNumberPagination.page_size = self.request.GET.get(page_size)
         else:
-            pagination.PageNumberPagination.page_size = 10
+            pagination.PageNumberPagination.page_size = 12
         query = self.request.GET.get('q')
         if query:
             queryset_list = queryset_list.filter(
