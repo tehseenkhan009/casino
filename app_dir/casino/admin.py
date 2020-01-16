@@ -1,8 +1,9 @@
 from django.contrib import admin
 from .models import Casino, Bonus, Deals, CountryUrl, Country
+from adminsortable.admin import SortableAdmin
 
 
-class CasinoAdmin(admin.ModelAdmin):
+class CasinoAdmin(SortableAdmin):
     list_display = ('name', 'is_recommended')
     ordering = ('name', 'is_recommended')
 
@@ -11,7 +12,7 @@ class BonusAdmin(admin.ModelAdmin):
     pass
 
 
-class DealsAdmin(admin.ModelAdmin):
+class DealsAdmin(SortableAdmin):
     def get_object(self, request, object_id, s):
         self.obj = super(DealsAdmin, self).get_object(request, object_id)
         return self.obj
@@ -22,11 +23,11 @@ class DealsAdmin(admin.ModelAdmin):
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 
-class CountryAdmin(admin.ModelAdmin):
+class CountryAdmin(SortableAdmin):
     pass
 
 
-class CountryUrlAdmin(admin.ModelAdmin):
+class CountryUrlAdmin(SortableAdmin):
     pass
 
 

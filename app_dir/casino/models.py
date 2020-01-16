@@ -2,9 +2,11 @@ from django.db import models
 from django.utils.translation import pgettext_lazy
 from django.utils.timezone import now
 from tinymce.models import HTMLField
+from autoslug import AutoSlugField
+from adminsortable.models import SortableMixin
 
 
-class Casino(models.Model):
+class Casino(SortableMixin):
     name = models.CharField(
         pgettext_lazy('Casino field', 'name'),
         unique=True,
@@ -18,7 +20,7 @@ class Casino(models.Model):
         null=True,
         blank=True
     )
-
+    slug = AutoSlugField(populate_from='name', null=True, blank=True)
     url_casino = models.URLField(max_length=500, null=True, blank=True, default='https://')
     background = models.FileField(
         pgettext_lazy('Background', 'Background'),
@@ -46,9 +48,12 @@ class Casino(models.Model):
         pgettext_lazy('Casino Updated', 'updated at'),
         default=now
     )
+    order_id = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
     class Meta:
         app_label = 'casino'
+        verbose_name_plural = 'Casinos'
+        ordering = ['order_id']
 
     def __str__(self):
         return self.name
@@ -120,7 +125,7 @@ class CountryUrl(models.Model):
     url = models.CharField(max_length=255, unique=True)
 
 
-class Deals(models.Model):
+class Deals(SortableMixin):
     def __str__(self):
         return self.casino.name + ' | Bonus: ' + self.bonus.name[:50]
 
@@ -130,6 +135,7 @@ class Deals(models.Model):
         max_length=128
     )
     is_disabled = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
+    is_top = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
     casino = models.ForeignKey(
         Casino,
         on_delete=None,
@@ -187,6 +193,8 @@ class Deals(models.Model):
         pgettext_lazy('Updated', 'updated at'),
         default=now
     )
+    order_id = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
     class Meta:
         verbose_name_plural = 'Deals'
+        ordering = ['order_id']

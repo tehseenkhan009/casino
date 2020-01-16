@@ -30,7 +30,8 @@ DEFAULT_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tinymce'
+    'tinymce',
+    'adminsortable'
 )
 
 TINYMCE_DEFAULT_CONFIG = {

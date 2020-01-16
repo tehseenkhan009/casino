@@ -23,3 +23,5 @@ urllib3==1.23
 psycopg2
 django-tinymce
 geoip2
+django-autoslug
+django-admin-sortable

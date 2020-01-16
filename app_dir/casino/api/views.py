@@ -25,11 +25,10 @@ def get_client_country(request):
     g = GeoIP2()
     try:
         country_info = g.country(ip)
-        country = country_info['country_code']
     except:
-        country = 0
+        country_info = 0
 
-    return country
+    return country_info
 
 
 class CasinoListAPIView(ListAPIView):
@@ -78,11 +77,16 @@ class DealsListAPIView(ListAPIView):
         else:
             pagination.PageNumberPagination.page_size = 10
 
-        query = self.request.GET.get('q')
-        if query:
-            queryset_list = queryset_list.filter(
-                Q(email__icontains=query) |
-                Q(username__icontains=query)
-            )
+        queryset_list.order_by('order_id')
 
-        return queryset_list.order_by('-id')
+        sort = self.request.GET.get('sort')
+        if sort == 'spins':
+            queryset_list = queryset_list.order_by('-free_spins')
+        if sort == 'bonus':
+            queryset_list = queryset_list.order_by('-bonus__price')
+        if sort == 'percent':
+            queryset_list = queryset_list.order_by('-bonus__percent')
+        if sort == 'newest':
+            queryset_list = queryset_list.order_by('-created_at')
+
+        return queryset_list
