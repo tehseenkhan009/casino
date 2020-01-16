@@ -44,11 +44,10 @@ class CasinoListAPIView(ListAPIView):
             pagination.PageNumberPagination.page_size = self.request.GET.get(page_size)
         else:
             pagination.PageNumberPagination.page_size = 12
-        query = self.request.GET.get('q')
+        query = self.request.GET.get('slug')
         if query:
             queryset_list = queryset_list.filter(
-                Q(email__icontains=query) |
-                Q(username__icontains=query)
+                Q(slug=query)
             )
 
         return queryset_list.order_by('-id')
@@ -61,7 +60,10 @@ class DealsListAPIView(ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         country = get_client_country(self.request)
-        client_country = country['country_code']
+        try:
+            client_country = country['country_code']
+        except:
+            client_country = 0
         filters = Q(url_country=None)
         country_id = 243
         if client_country is not 0:
