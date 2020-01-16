@@ -60,7 +60,8 @@ class DealsListAPIView(ListAPIView):
     pagination_class = PostLimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
-        client_country = get_client_country(self.request)
+        country = get_client_country(self.request)
+        client_country = country['country_code']
         filters = Q(url_country=None)
         country_id = 243
         if client_country is not 0:
