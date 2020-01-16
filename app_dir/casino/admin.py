@@ -5,7 +5,6 @@ from adminsortable.admin import SortableAdmin
 
 class CasinoAdmin(SortableAdmin):
     list_display = ('name', 'is_recommended')
-    ordering = ('name', 'is_recommended')
 
 
 class BonusAdmin(admin.ModelAdmin):
