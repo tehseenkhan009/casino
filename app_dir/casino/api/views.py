@@ -50,7 +50,7 @@ class CasinoListAPIView(ListAPIView):
                 Q(slug=query)
             )
 
-        return queryset_list.order_by('-id')
+        return queryset_list.order_by('order_id')
 
 
 class DealsListAPIView(ListAPIView):
