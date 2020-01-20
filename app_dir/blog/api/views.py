@@ -15,18 +15,15 @@ class PostListAPIView(ListAPIView):
     pagination_class = PostLimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = Post.objects.filter(status=1)
+        queryset_list = Post.objects.filter(Q(status=1)).exclude(Q(category__title='Legal'))
 
         page_size = 'page_size'
         if self.request.GET.get(page_size):
             pagination.PageNumberPagination.page_size = self.request.GET.get(page_size)
         else:
             pagination.PageNumberPagination.page_size = 10
-        query = self.request.GET.get('q')
+        query = self.request.GET.get('post')
         if query:
-            queryset_list = queryset_list.filter(
-                Q(email__icontains=query) |
-                Q(username__icontains=query)
-            )
+            queryset_list = queryset_list.filter(Q(slug=query))
 
         return queryset_list.order_by('-id')

@@ -13,6 +13,7 @@ STATUS = (
 class Category(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
+    is_hidden = models.BooleanField(blank=True, choices=[(False, 'No'), (True, 'Yes')], default=False)
     updated_on = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
