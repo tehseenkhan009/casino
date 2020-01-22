@@ -12,6 +12,8 @@ class BonusAdmin(admin.ModelAdmin):
 
 
 class DealsAdmin(SortableAdmin):
+    list_display = ('name', 'counter', 'is_disabled', 'is_top')
+
     def get_object(self, request, object_id, s):
         self.obj = super(DealsAdmin, self).get_object(request, object_id)
         return self.obj
