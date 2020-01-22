@@ -1,8 +1,5 @@
 from django.urls import path
-
-from .views import (
-    CasinoListAPIView, DealsListAPIView, DealActions
-)
+from .views import (CasinoListAPIView, DealsListAPIView, DealActions)
 
 urlpatterns = [
     path('', CasinoListAPIView.as_view(), name='casino-list'),
