@@ -4,10 +4,11 @@ from adminsortable.admin import SortableAdmin
 
 
 class CasinoAdmin(SortableAdmin):
-    list_display = ('name', 'is_recommended')
+    list_display = ('name', 'is_recommended', 'is_disabled')
 
 
 class BonusAdmin(admin.ModelAdmin):
+    list_display = ('name', 'percent', 'price')
     pass
 
 
