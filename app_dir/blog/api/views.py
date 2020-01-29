@@ -16,10 +16,12 @@ class PostListAPIView(ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
 
-        queryset_list = Post.objects.exclude(Q(category__title='Legal')).filter(Q(status=1))
+        queryset_list = Post.objects.filter(Q(status=1))
         query = self.request.GET.get('slug')
         if query:
             queryset_list = queryset_list.filter(Q(slug=query))
+        else:
+            queryset_list = queryset_list.exclude(Q(category__title='Legal'))
 
         page_size = 'page_size'
         if self.request.GET.get(page_size):
