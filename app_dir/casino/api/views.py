@@ -70,9 +70,14 @@ class DealsListAPIView(ListAPIView):
             client_country = 0
         filters = Q(url_country=None)
         country_id = 243
+        sort = self.request.GET.get('sort')
+
         if client_country is not 0:
             country_id = Country.objects.get(code=client_country)
             filters = (~Q(url_country__country_id=country_id) | Q(url_country=None))
+
+        if sort == 'top':
+            filters = (filters & Q(is_top=True))
 
         queryset_list = Deals.objects.prefetch_related(
             Prefetch('url_country', queryset=CountryUrl.objects.filter(country_id=country_id))). \
@@ -86,7 +91,6 @@ class DealsListAPIView(ListAPIView):
 
         queryset_list.order_by('order_id')
 
-        sort = self.request.GET.get('sort')
         if sort == 'spins':
             queryset_list = queryset_list.order_by('-free_spins')
         if sort == 'bonus':
