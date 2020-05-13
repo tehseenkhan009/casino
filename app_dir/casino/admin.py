@@ -13,7 +13,7 @@ class BonusAdmin(admin.ModelAdmin):
 
 
 class DealsAdmin(SortableAdmin):
-    list_display = ('name', 'counter', 'is_disabled', 'is_top')
+    list_display = ('name', 'counter', 'is_disabled', 'is_top','is_top_One','is_top_Two','is_top_Three','Game_Type')
 
     def get_object(self, request, object_id, s):
         self.obj = super(DealsAdmin, self).get_object(request, object_id)

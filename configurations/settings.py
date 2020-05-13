@@ -13,7 +13,8 @@ DEFAULT_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',
-    'adminsortable'
+    'adminsortable',
+    'multiselectfield',
 )
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -127,4 +128,3 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
-

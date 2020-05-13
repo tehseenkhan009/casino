@@ -4,7 +4,7 @@ from django.utils.timezone import now
 from tinymce.models import HTMLField
 from autoslug import AutoSlugField
 from adminsortable.models import SortableMixin
-
+from multiselectfield import MultiSelectField
 
 class Casino(SortableMixin):
     name = models.CharField(
@@ -136,11 +136,28 @@ class Deals(SortableMixin):
     )
     is_disabled = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
     is_top = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
+    is_top_One = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
+    is_top_Two = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
+    is_top_Three = models.BooleanField(blank=True, choices=((False, 'No'), (True, 'Yes')), default=False)
     casino = models.ForeignKey(
         Casino,
         on_delete=None,
         null=True
     )
+    awesome_choices=(
+    ('htp roulette', 'htp roulette'),('htp online slots', 'htp online slots'),
+    (' htp poker', ' htp poker'),('htp blackjack', 'htp blackjack'),('htp baccarat', 'htp baccarat'),
+    (' htp craps', ' htp craps'),('htp keno', 'htp keno'),('htp bingo', 'htp bingo'),
+    (' t10 fastest payout', ' t10 fastest payout'),(' t10 live casinos', ' t10 live casinos'),
+    ('t10 new casinos', 't10 new casinos'),('t10 mobile casinos', 't10 mobile casinos'),
+    ('t10 best jackpot', 't10 best jackpot'),('t10 bitcoin casino', 't10 bitcoin casino'),
+    ('t10 best bonus', 't10 best bonus'),('t10 no deposit bonus', 't10 no deposit bonus'),
+    ('free spins', 'free spins'),('poker freerolls', 'poker freerolls'),
+    ('no deposit bonus', 'no deposit bonus'),('casino signup bonus', 'casino signup bonus'),
+    ('no wager bonus', 'no wager bonus')
+
+    )
+    Game_Type = MultiSelectField(choices=awesome_choices)
     counter = models.IntegerField(
         pgettext_lazy('Clicks', 'Clicks'),
         blank=True,

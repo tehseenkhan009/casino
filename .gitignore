@@ -2,6 +2,10 @@
 *.pyo
 *.pyc
 .env
+.venv
+.virtualenv
+.envr1
+envr1
 env
 # SQLite
 *.db

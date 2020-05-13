@@ -47,6 +47,7 @@ class DealsSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'casino',
+            'Game_Type'
             'bonus',
             'deal_message',
             'free_spins',
